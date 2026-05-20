@@ -13,6 +13,7 @@ from ..models.cost_head import CostHead
 from ..models.milestone import Milestone
 from ..models.project import Project
 from ..models.transaction import Transaction
+from ..services.alerts import compute_alerts
 from ..services.ctc import compute_ctc
 from ..services.health_score import compute_health_score
 
@@ -148,6 +149,32 @@ def project_ctc(project_id: str):
         return jsonify(result), 422
 
     return jsonify(result)
+
+
+@bp.get("/projects/<project_id>/alerts")
+def project_alerts(project_id: str):
+    """
+    Returns active cost-overrun alerts for a project.
+
+    Alert types:
+      over_budget   — cost head has exceeded 100% of budget          (critical)
+      near_limit    — cost head ≥ 90% of budget                      (warning)
+      overrun_risk  — cost head > 80% budget AND milestone < 60%     (warning)
+      pace_risk     — 3m burn rate exhausts remaining budget before
+                      the project's expected completion date          (info)
+
+    Response includes counts {critical, warning, info, total} for badge display.
+    """
+    try:
+        org_id = _org_id()
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+    Project.query.filter_by(
+        id=project_id, organisation_id=org_id
+    ).first_or_404()
+
+    return jsonify(compute_alerts(project_id))
 
 
 @bp.get("/projects/<project_id>/health")
