@@ -13,6 +13,7 @@ from ..models.cost_head import CostHead
 from ..models.milestone import Milestone
 from ..models.project import Project
 from ..models.transaction import Transaction
+from ..services.ctc import compute_ctc
 from ..services.health_score import compute_health_score
 
 bp = Blueprint("projects", __name__, url_prefix="/api/v1")
@@ -93,6 +94,61 @@ def get_project(project_id: str):
 
 
 # ── GET /api/v1/projects/<id>/health ────────────────────────────────────────
+
+@bp.get("/projects/<project_id>/cost-to-complete")
+def project_ctc(project_id: str):
+    """
+    Returns the Cost-to-Complete forecast for a project.
+
+    EVM per cost head:
+      earned_value_inr, cpi, eac_inr, ctc_inr, budget_variance_inr, status
+
+    Project summary:
+      total_eac_inr, total_ctc_inr, total_variance_inr, project_cpi
+
+    Time-based (burn-rate) projection:
+      burn_rate_3m_inr, months_remaining, time_ctc_inr, time_efc_inr,
+      months_to_finish_at_burn, schedule_risk
+
+    Query params:
+      as_of                 YYYY-MM-DD  cut-off for actuals (default today)
+      override_<head_id>    float       manual completion % for that cost head
+    """
+    try:
+        org_id = _org_id()
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+    project = Project.query.filter_by(
+        id=project_id, organisation_id=org_id
+    ).first_or_404()
+
+    # Parse as_of
+    as_of_raw = request.args.get("as_of")
+    as_of = None
+    if as_of_raw:
+        from datetime import date as _date
+        try:
+            as_of = _date.fromisoformat(as_of_raw)
+        except ValueError:
+            return jsonify({"error": "as_of must be YYYY-MM-DD"}), 400
+
+    # Collect per-head completion overrides from query string
+    overrides: dict[str, float] = {}
+    for k, v in request.args.items():
+        if k.startswith("override_"):
+            head_id = k[len("override_"):]
+            try:
+                overrides[head_id] = float(v)
+            except ValueError:
+                return jsonify({"error": f"override_{head_id} must be a number"}), 400
+
+    result = compute_ctc(project, as_of=as_of, completion_overrides=overrides or None)
+    if "error" in result:
+        return jsonify(result), 422
+
+    return jsonify(result)
+
 
 @bp.get("/projects/<project_id>/health")
 def project_health(project_id: str):
