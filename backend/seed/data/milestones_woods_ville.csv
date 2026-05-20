@@ -1,0 +1,11 @@
+phase,name,planned_date,actual_date,completion_percentage,notes
+Phase 1,Site Clearance & Layout - Phase 1,2023-09-30,2023-09-22,100,Early start advantage used well
+Phase 1,Foundation & PCC - Phase 1,2023-12-31,2024-01-08,100,Rock strata found; extra blasting needed
+Phase 1,RCC Frame (G+3) - Phase 1,2024-04-30,2024-04-30,100,On schedule
+Phase 1,Brickwork & Lintels - Phase 1,2024-07-31,2024-07-28,100,
+Phase 1,MEP First Fix - Phase 1,2024-09-30,2024-10-05,100,Minor conduit rerouting at stairwell
+Phase 1,Plastering - Phase 1,2024-11-30,2024-12-03,100,
+Phase 2,Flooring & Tiling - Phase 2,2025-03-31,2025-04-10,100,Vitrified tile consignment delayed by 10 days
+Phase 2,MEP Rough-in & Conduit - Phase 2,2026-04-30,,65,Behind schedule — subcontractor dispute; 35% conduit work pending
+Phase 2,Painting & Finishing - Phase 2,2026-07-31,,0,Not started
+Phase 2,External Development & Landscaping,2026-09-30,,0,Not started — RERA NOC pending

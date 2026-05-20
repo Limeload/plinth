@@ -1,0 +1,17 @@
+phase,name,planned_date,actual_date,completion_percentage,notes
+Phase 4,Foundation & Excavation - Phase 4,2023-03-31,2023-04-10,100,Completed 10 days late due to monsoon prep
+Phase 4,RCC Frame & Columns - Phase 4,2023-06-30,2023-07-05,100,Minor delay in TMT delivery
+Phase 4,Brickwork & Masonry - Phase 4,2023-09-30,2023-09-28,100,Completed ahead of schedule
+Phase 4,MEP Rough-in & Conduit - Phase 4,2023-11-30,2023-11-25,100,
+Phase 4,Plastering & Waterproofing - Phase 4,2024-01-31,2024-02-12,100,Waterproofing rework added 12 days
+Phase 4,Flooring & Tiling - Phase 4,2024-04-30,2024-04-28,100,
+Phase 4,Painting & Final Finishing - Phase 4,2024-06-30,2024-07-08,100,Texture paint decision delayed handover
+Phase 4,Handover & OC - Phase 4,2024-08-31,2024-09-02,100,OC received 2 days post target
+Phase 5,Foundation & Excavation - Phase 5,2024-06-30,2024-06-25,100,
+Phase 5,RCC Frame & Columns - Phase 5,2024-10-31,2024-11-05,100,Extra column added in G+4 redesign
+Phase 5,Brickwork & Masonry - Phase 5,2025-02-28,2025-03-10,100,Labour shortage post-Holi week
+Phase 5,MEP Rough-in & Conduit - Phase 5,2025-06-30,2025-07-15,100,CPVC pipe spec change mid-phase
+Phase 5,Plastering & Waterproofing - Phase 5,2025-09-30,2025-10-02,100,
+Phase 5,Flooring & Tiling - Phase 5,2025-12-31,,68,Delayed — granite supplier backlog; 32% tiles pending
+Phase 5,Painting & Final Finishing - Phase 5,2026-03-31,,42,Not started — awaiting flooring sign-off; finishing overrun triggered
+Phase 5,Handover & OC - Phase 5,2026-06-30,,0,Pending upstream phases
