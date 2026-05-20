@@ -1,47 +1,69 @@
+"""
+Transaction import endpoints.
+
+POST /api/v1/projects/<id>/import/csv    — cost-sheet CSV (Plinth format)
+POST /api/v1/projects/<id>/import/tally  — Tally ERP export (.csv, .xls, .xlsx)
+
+Both endpoints accept multipart/form-data with a "file" field and return:
+  {format, imported, skipped_duplicate, errors}
+
+All routes require X-Organisation-Id header.
+"""
 from flask import Blueprint, jsonify, request
 
+from ..models.project import Project
 from ..services.csv_ingestion import ingest_csv
+from ..services.tally_parser import ingest_tally_file
 
 bp = Blueprint("transactions", __name__, url_prefix="/api/v1")
 
-ALLOWED_EXTENSIONS = {".csv"}
-MAX_FILE_BYTES = 10 * 1024 * 1024  # 10 MB
+MAX_FILE_BYTES    = 10 * 1024 * 1024   # 10 MB
+_TALLY_EXTENSIONS = {".csv", ".xls", ".xlsx"}
+_CSV_EXTENSIONS   = {".csv"}
 
 
-def _get_organisation_id() -> str:
-    """
-    Temporary: read org from header. Replace with JWT decode once auth is built.
-    Header:  X-Organisation-Id: <uuid>
-    """
-    org_id = request.headers.get("X-Organisation-Id")
-    if not org_id:
-        raise ValueError("Missing X-Organisation-Id header")
-    return org_id
+def _org_id() -> str:
+    org = request.headers.get("X-Organisation-Id", "").strip()
+    if not org:
+        raise ValueError("X-Organisation-Id header is required")
+    return org
 
 
-@bp.route("/projects/<project_id>/import/csv", methods=["POST"])
+def _read_upload(allowed_exts: set[str]) -> tuple[bytes, str]:
+    """Validate and read the uploaded file. Returns (file_bytes, filename)."""
+    if "file" not in request.files:
+        raise ValueError("No file provided — send a multipart field named 'file'")
+    f = request.files["file"]
+    if not f.filename:
+        raise ValueError("File has no name")
+    ext = "." + f.filename.rsplit(".", 1)[-1].lower() if "." in f.filename else ""
+    if ext not in allowed_exts:
+        raise ValueError(
+            f"Unsupported file type '{ext}'. Accepted: {', '.join(sorted(allowed_exts))}"
+        )
+    data = f.read()
+    if len(data) > MAX_FILE_BYTES:
+        raise ValueError("File exceeds 10 MB limit")
+    return data, f.filename
+
+
+# ── Cost-sheet CSV ────────────────────────────────────────────────────────────
+
+@bp.post("/projects/<project_id>/import/csv")
 def import_csv(project_id: str):
     """
-    POST /api/v1/projects/:id/import/csv
-    Body: multipart/form-data  field name: "file"
-    Accepts: cost-sheet CSV or Tally export CSV.
-    Returns: {format, imported, skipped, errors}
+    POST /api/v1/projects/<id>/import/csv
+    Accepts a cost-sheet CSV in Plinth format (date, description, category,
+    vendor, amount, invoice_no, gst, tds).
+
+    The same endpoint auto-detects Tally CSV exports and routes them through
+    the Tally parser.
     """
     try:
-        org_id = _get_organisation_id()
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 401
-
-    if "file" not in request.files:
-        return jsonify({"error": "No file provided. Send a multipart field named 'file'."}), 400
-
-    file = request.files["file"]
-    if not file.filename or not file.filename.lower().endswith(".csv"):
-        return jsonify({"error": "Only .csv files are accepted"}), 400
-
-    file_bytes = file.read()
-    if len(file_bytes) > MAX_FILE_BYTES:
-        return jsonify({"error": "File exceeds 10 MB limit"}), 413
+        org_id = _org_id()
+        file_bytes, _ = _read_upload(_CSV_EXTENSIONS)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
 
     try:
         result = ingest_csv(
@@ -50,75 +72,37 @@ def import_csv(project_id: str):
             organisation_id=org_id,
         )
         return jsonify(result), 200
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 400
-    except Exception as exc:
-        return jsonify({"error": f"Ingestion failed: {exc}"}), 500
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        return jsonify({"error": f"Ingestion failed: {e}"}), 500
 
 
-@bp.route("/projects/<project_id>/import/tally", methods=["POST"])
+# ── Tally export ──────────────────────────────────────────────────────────────
+
+@bp.post("/projects/<project_id>/import/tally")
 def import_tally(project_id: str):
     """
-    POST /api/v1/projects/:id/import/tally
-    Body: multipart/form-data  field name: "file"
-    Accepts: Tally Excel export (.xlsx) or CSV.
-    Returns: {format, imported, skipped, errors}
+    POST /api/v1/projects/<id>/import/tally
+    Accepts a Tally ERP voucher export in CSV, XLS, or XLSX format.
+
+    Idempotent: re-uploading the same file skips already-imported rows
+    (deduplicated by voucher hash stored as invoice_number).
     """
     try:
-        org_id = _get_organisation_id()
-    except ValueError as exc:
-        return jsonify({"error": str(exc)}), 401
-
-    if "file" not in request.files:
-        return jsonify({"error": "No file provided. Send a multipart field named 'file'."}), 400
-
-    file = request.files["file"]
-    filename = (file.filename or "").lower()
-
-    if filename.endswith(".xlsx") or filename.endswith(".xls"):
-        try:
-            import pandas as pd
-            import io
-            df = pd.read_csv(io.BytesIO(file.read()), dtype=str) if filename.endswith(".csv") \
-                else pd.read_excel(file, dtype=str)
-        except Exception as exc:
-            return jsonify({"error": f"Could not parse file: {exc}"}), 400
-    elif filename.endswith(".csv"):
-        file_bytes = file.read()
-        try:
-            result = ingest_csv(
-                file_bytes=file_bytes,
-                project_id=project_id,
-                organisation_id=org_id,
-            )
-            return jsonify(result), 200
-        except ValueError as exc:
-            return jsonify({"error": str(exc)}), 400
-    else:
-        return jsonify({"error": "Only .csv or .xlsx files are accepted"}), 400
-
-    from ..services.tally_parser import parse_tally_df, is_tally_format
-    from ..models.project import Project
-    from ..extensions import db
-
-    if not is_tally_format(df):
-        return jsonify({"error": "File does not appear to be a Tally export"}), 400
+        org_id = _org_id()
+        file_bytes, filename = _read_upload(_TALLY_EXTENSIONS)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
 
     project = Project.query.filter_by(
         id=project_id, organisation_id=org_id
     ).first_or_404()
 
     try:
-        df = df.dropna(how="all")
-        transactions, errors = parse_tally_df(df, project)
-        db.session.add_all(transactions)
-        db.session.commit()
-        return jsonify({
-            "format": "tally",
-            "imported": len(transactions),
-            "skipped": len(errors),
-            "errors": errors,
-        }), 200
-    except Exception as exc:
-        db.session.rollback()
-        return jsonify({"error": f"Ingestion failed: {exc}"}), 500
+        result = ingest_tally_file(file_bytes, filename, project)
+        return jsonify(result), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        return jsonify({"error": f"Ingestion failed: {e}"}), 500
