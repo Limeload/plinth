@@ -1,0 +1,51 @@
+contractor,payment_date,amount_inr,milestone_name,invoice_number,description,gst_amount_inr,tds_amount_inr
+Ramesh Construction Co.,2023-03-15,2500000,,RCC/WE/001,Mobilisation advance — Phase 4 civil works,0,0
+Ramesh Construction Co.,2023-04-10,1800000,Foundation & Excavation - Phase 4,RCC/WE/002,Foundation & excavation completion payment — Phase 4,0,36000
+Ramesh Construction Co.,2023-07-05,2800000,RCC Frame & Columns - Phase 4,RCC/WE/003,RCC frame & columns — Phase 4,0,56000
+Ramesh Construction Co.,2023-09-28,2200000,Brickwork & Masonry - Phase 4,RCC/WE/004,Brickwork & masonry — Phase 4,0,44000
+Ramesh Construction Co.,2024-02-12,2000000,Plastering & Waterproofing - Phase 4,RCC/WE/005,Plastering & waterproofing — Phase 4,0,40000
+Ramesh Construction Co.,2024-06-25,2000000,Foundation & Excavation - Phase 5,RCC/WE/006,Foundation & excavation — Phase 5 mobilisation,0,40000
+Ramesh Construction Co.,2024-11-05,3000000,RCC Frame & Columns - Phase 5,RCC/WE/007,RCC frame — Phase 5 G+5 structure,0,60000
+Ramesh Construction Co.,2025-03-10,2500000,Brickwork & Masonry - Phase 5,RCC/WE/008,Brickwork & masonry — Phase 5,0,50000
+Ramesh Construction Co.,2025-10-02,2200000,Plastering & Waterproofing - Phase 5,RCC/WE/009,Plastering & waterproofing — Phase 5,0,44000
+Ramesh Construction Co.,2026-02-28,1200000,Flooring & Tiling - Phase 5,RCC/WE/010,Partial payment — Phase 5 ongoing (68% complete),0,24000
+Suresh MEP Solutions,2023-10-01,1000000,,MEP/WE/001,MEP mobilisation advance — Phase 4,0,0
+Suresh MEP Solutions,2023-11-25,1400000,MEP Rough-in & Conduit - Phase 4,MEP/WE/002,MEP rough-in conduit completion — Phase 4,252000,28000
+Suresh MEP Solutions,2024-05-20,800000,,MEP/WE/003,MEP second fix & testing — Phase 4,144000,16000
+Suresh MEP Solutions,2024-09-02,600000,Handover & OC - Phase 4,MEP/WE/004,MEP snag clearance & OC support — Phase 4,108000,12000
+Suresh MEP Solutions,2025-05-01,1000000,,MEP/WE/005,MEP mobilisation advance — Phase 5,0,0
+Suresh MEP Solutions,2025-07-15,1800000,MEP Rough-in & Conduit - Phase 5,MEP/WE/006,MEP rough-in conduit — Phase 5,324000,36000
+Suresh MEP Solutions,2026-01-20,1000000,,MEP/WE/007,MEP second fix ongoing — Phase 5 (partial),180000,20000
+SR Finishing Works,2024-04-01,600000,,FIN/WE/001,Finishing works mobilisation — Phase 4,108000,12000
+SR Finishing Works,2024-04-28,2200000,Flooring & Tiling - Phase 4,FIN/WE/002,Flooring & vitrified tiles supply+fix — Phase 4,396000,44000
+SR Finishing Works,2024-07-08,1800000,Painting & Final Finishing - Phase 4,FIN/WE/003,Painting primer emulsion texture — Phase 4,324000,36000
+SR Finishing Works,2024-09-15,700000,,FIN/WE/004,False ceiling & aluminium works — Phase 4,126000,14000
+SR Finishing Works,2024-10-01,600000,,FIN/WE/005,Phase 5 finishing mobilisation,108000,12000
+SR Finishing Works,2025-01-31,700000,,FIN/WE/006,Plastering support & POP — Phase 5 Jan,126000,14000
+SR Finishing Works,2025-04-30,700000,,FIN/WE/007,Tile samples approval & procurement — Phase 5 Apr,126000,14000
+SR Finishing Works,2026-02-15,600000,,FIN/WE/008,Flooring Phase 5 partial (68% tiles laid),108000,12000
+ManpowerFirst Pvt. Ltd.,2023-04-30,320000,,LAB/WE/001,Site labour wages — April 2023,0,0
+ManpowerFirst Pvt. Ltd.,2023-05-31,350000,,LAB/WE/002,Site labour wages — May 2023,0,0
+ManpowerFirst Pvt. Ltd.,2023-06-30,380000,,LAB/WE/003,Site labour wages — June 2023,0,0
+ManpowerFirst Pvt. Ltd.,2023-09-30,400000,,LAB/WE/004,Site labour wages — September 2023,0,0
+ManpowerFirst Pvt. Ltd.,2023-12-31,420000,,LAB/WE/005,Site labour wages — December 2023,0,0
+ManpowerFirst Pvt. Ltd.,2024-03-31,430000,,LAB/WE/006,Site labour wages — March 2024,0,0
+ManpowerFirst Pvt. Ltd.,2024-06-30,450000,,LAB/WE/007,Site labour wages — June 2024,0,0
+ManpowerFirst Pvt. Ltd.,2024-09-30,460000,,LAB/WE/008,Site labour wages — September 2024,0,0
+ManpowerFirst Pvt. Ltd.,2024-12-31,470000,,LAB/WE/009,Site labour wages — December 2024,0,0
+ManpowerFirst Pvt. Ltd.,2025-03-31,480000,,LAB/WE/010,Site labour wages — March 2025,0,0
+ManpowerFirst Pvt. Ltd.,2025-06-30,490000,,LAB/WE/011,Site labour wages — June 2025,0,0
+ManpowerFirst Pvt. Ltd.,2025-09-30,500000,,LAB/WE/012,Site labour wages — September 2025,0,0
+ManpowerFirst Pvt. Ltd.,2025-12-31,510000,,LAB/WE/013,Site labour wages — December 2025,0,0
+ManpowerFirst Pvt. Ltd.,2026-03-31,520000,,LAB/WE/014,Site labour wages — March 2026,0,0
+Greenscapes Pvt. Ltd.,2025-08-01,1500000,,EXT/WE/001,External development mobilisation — landscaping compound wall,270000,30000
+Greenscapes Pvt. Ltd.,2026-04-15,2000000,,EXT/WE/002,External development 60% completion — road paving gate STP,360000,40000
+HireEquip Co.,2023-05-31,200000,,EQP/WE/001,JCB & excavator hire — May 2023,36000,0
+HireEquip Co.,2023-08-31,250000,,EQP/WE/002,Crane & scaffolding hire — August 2023,45000,0
+HireEquip Co.,2023-11-30,180000,,EQP/WE/003,Transit mixer & concrete pump — November 2023,32400,0
+HireEquip Co.,2024-02-29,200000,,EQP/WE/004,Scaffolding & compactor hire — February 2024,36000,0
+HireEquip Co.,2024-07-31,220000,,EQP/WE/005,Equipment hire — July 2024,39600,0
+HireEquip Co.,2025-01-31,240000,,EQP/WE/006,Equipment hire — January 2025,43200,0
+HireEquip Co.,2025-06-30,260000,,EQP/WE/007,Equipment hire — June 2025,46800,0
+HireEquip Co.,2025-11-30,270000,,EQP/WE/008,Equipment hire — November 2025,48600,0
+HireEquip Co.,2026-02-28,280000,,EQP/WE/009,Equipment hire — February 2026,50400,0

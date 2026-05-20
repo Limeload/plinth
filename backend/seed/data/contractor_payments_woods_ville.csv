@@ -1,0 +1,29 @@
+contractor,payment_date,amount_inr,milestone_name,invoice_number,description,gst_amount_inr,tds_amount_inr
+Kolkata Constructions Pvt. Ltd.,2023-09-01,2000000,,KCP/WV/001,Mobilisation advance — civil works Phase 1,0,0
+Kolkata Constructions Pvt. Ltd.,2023-09-22,1400000,Site Clearance & Layout - Phase 1,KCP/WV/002,Site clearance & layout — Phase 1,0,28000
+Kolkata Constructions Pvt. Ltd.,2024-01-08,1800000,Foundation & PCC - Phase 1,KCP/WV/003,Foundation & PCC — Phase 1 (rock strata extra),0,36000
+Kolkata Constructions Pvt. Ltd.,2024-04-30,2400000,RCC Frame (G+3) - Phase 1,KCP/WV/004,RCC frame G+3 — Phase 1,0,48000
+Kolkata Constructions Pvt. Ltd.,2024-07-28,1600000,Brickwork & Lintels - Phase 1,KCP/WV/005,Brickwork & lintels — Phase 1,0,32000
+Kolkata Constructions Pvt. Ltd.,2024-12-03,1400000,Plastering - Phase 1,KCP/WV/006,Plastering — Phase 1,0,28000
+Kolkata Constructions Pvt. Ltd.,2025-07-01,2000000,,KCP/WV/007,Phase 2 civil mobilisation advance,0,40000
+Bangalore MEP Works,2023-10-15,700000,,MEP/WV/001,MEP mobilisation advance — Phase 1,0,0
+Bangalore MEP Works,2024-10-05,1200000,MEP First Fix - Phase 1,MEP/WV/002,MEP first fix conduit wiring — Phase 1,216000,24000
+Bangalore MEP Works,2025-01-31,800000,,MEP/WV/003,MEP second fix & testing — Phase 1,144000,16000
+Bangalore MEP Works,2025-11-01,900000,,MEP/WV/004,Phase 2 MEP mobilisation advance,0,0
+Bangalore MEP Works,2026-02-28,1200000,,MEP/WV/005,MEP rough-in Phase 2 partial (65% done; delayed — subcontractor dispute),216000,24000
+StyleFinish Interiors,2025-03-01,500000,,FIN/WV/001,Finishing mobilisation — Phase 1,90000,10000
+StyleFinish Interiors,2025-04-10,1800000,Flooring & Tiling - Phase 2,FIN/WV/002,Flooring & vitrified tiles — Phase 1 (completed Phase 2 start),324000,36000
+StyleFinish Interiors,2025-07-31,700000,,FIN/WV/003,False ceiling doors windows — Phase 1 finishing,126000,14000
+StyleFinish Interiors,2025-10-31,600000,,FIN/WV/004,Painting primer emulsion — Phase 1,108000,12000
+QuickLabour Solutions,2023-10-31,300000,,LAB/WV/001,Site labour wages — October 2023,0,0
+QuickLabour Solutions,2023-12-31,330000,,LAB/WV/002,Site labour wages — December 2023,0,0
+QuickLabour Solutions,2024-03-31,350000,,LAB/WV/003,Site labour wages — March 2024,0,0
+QuickLabour Solutions,2024-06-30,360000,,LAB/WV/004,Site labour wages — June 2024,0,0
+QuickLabour Solutions,2024-09-30,370000,,LAB/WV/005,Site labour wages — September 2024,0,0
+QuickLabour Solutions,2024-12-31,380000,,LAB/WV/006,Site labour wages — December 2024,0,0
+QuickLabour Solutions,2025-03-31,390000,,LAB/WV/007,Site labour wages — March 2025,0,0
+QuickLabour Solutions,2025-06-30,400000,,LAB/WV/008,Site labour wages — June 2025,0,0
+QuickLabour Solutions,2025-09-30,410000,,LAB/WV/009,Site labour wages — September 2025,0,0
+QuickLabour Solutions,2025-12-31,420000,,LAB/WV/010,Site labour wages — December 2025,0,0
+QuickLabour Solutions,2026-03-31,430000,,LAB/WV/011,Site labour wages — March 2026,0,0
+Earthworks & Gardens,2026-03-01,1200000,,EXT/WV/001,External development mobilisation — compound wall road,216000,24000
